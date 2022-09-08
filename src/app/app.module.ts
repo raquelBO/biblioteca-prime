@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import {MenubarModule} from 'primeng/menubar';
 import { AutoresComponent } from './autores/autores.component';
 import { LibrosComponent } from './libros/libros.component';
+import { HttpClientModule } from '@angular/common/http';
+import { TableModule } from 'primeng/table';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { LibrosComponent } from './libros/libros.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    MenubarModule
+    MenubarModule,
+    HttpClientModule,
+    TableModule
   ],
   providers: [],
   bootstrap: [AppComponent]
