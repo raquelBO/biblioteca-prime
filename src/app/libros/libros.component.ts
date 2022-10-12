@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Message } from 'primeng/api';
 import { Libro } from '../interface/libro.interface';
 import { LibrosService } from '../servicios/libros.service';
 
@@ -14,6 +15,8 @@ export class LibrosComponent implements OnInit {
   cargando: boolean = false;
   //Indica si el dialogo esta visible u oculto
   dialogoVisible: boolean = false;
+
+  mensajes: Message[] = [];
 
   constructor(
     private servicioLibros: LibrosService
@@ -33,6 +36,7 @@ cargarLibros(): void{
     error: (e) => {
       console.log(e);
       this.cargando = false;
+      this.mensajes = [{severity: 'error', summary: 'Error al cargar libros', detail: e.message}]
     }
   });
 }
