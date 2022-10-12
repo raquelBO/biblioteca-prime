@@ -8,9 +8,12 @@ import { LibrosService } from '../servicios/libros.service';
   styleUrls: ['./libros.component.css']
 })
 export class LibrosComponent implements OnInit {
-
+  //Aqui se guarda la lista de libros
   listaLibros: Libro[] = [];
-  cargando:boolean= false;
+  //Esta variable muestra la animacion de carga
+  cargando: boolean = false;
+  //Indica si el dialogo esta visible u oculto
+  dialogoVisible: boolean = false;
 
   constructor(
     private servicioLibros: LibrosService
@@ -29,8 +32,13 @@ cargarLibros(): void{
     },
     error: (e) => {
       console.log(e);
+      this.cargando = false;
     }
   });
+}
+mostrarDialogo(){
+  this.dialogoVisible = true;
+
 }
 
 }
