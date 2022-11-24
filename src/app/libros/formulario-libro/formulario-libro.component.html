@@ -1,4 +1,4 @@
-<div class="fiel" >
+<div class="field" >
     <label for="codigo">Código:</label>
     <p-inputNumber id="codigo" styleClass="w-full" class="w-full" [(ngModel)]="codigo"
     [ngClass]="{'ng-invalid': !codigoValido, 'ng-dirty': !codigoValido}">
@@ -6,14 +6,14 @@
     <small *ngIf="!codigoValido" id="codigo-help" class="p-error block">Ingresar código del libro</small>
 </div>
 
-<div class="fiel">
+<div class="field">
     <label for="titulo">Título</label>
     <input id="titulo" type="text" class="w-full" [(ngModel)]="titulo" pInputText
     [ngClass]="{'ng-invalid' : !tituloValido, 'ng-dirty': !tituloValido}">
     <small *ngIf="!tituloValido" id="codigo-help" class="p-error block">Ingresar el título del libro</small>
 </div>
 
-<div class="fiel">
+<div class="field">
     <label for="autor">Autor</label>
 
       <p-dropdown 
@@ -33,7 +33,7 @@
     <small *ngIf="!autorValido" id="codigo-help" class="p-error block"> Ingresar el autor del libro</small>
 </div>
 
-<div class="fiel">
+<div class="field">
     <label for="paginas">Páginas</label>
     <p-inputNumber id="paginas" styleClass="w-full" class="w-full"[(ngModel)]="paginas"
     [ngClass]="{'ng-invalid' : !paginasValido, 'ng-dirty': !paginasValido}">

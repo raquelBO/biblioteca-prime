@@ -47,7 +47,7 @@ export class LibrosComponent implements OnInit {
   }
 
   nuevo() {
-    this.tituloDialogo = 'Ragistrar libro';
+    this.tituloDialogo = 'Registrar libro';
     this.formLibro.limpiarFormulario();
     this.formLibro.modo = 'Registrar';
     this.formLibro.cargarAutores();
