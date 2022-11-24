@@ -41,7 +41,8 @@ export class LibrosComponent implements OnInit {
       error: (e) => {
         console.log(e);
         this.cargando = false;
-        this.mensajes = [{ severity: 'error', summary: 'Error al cargar libros', detail: e.message }]
+        const mensaje: string = e.status === 403 || e.status === 401 ? 'No autorizado' : e.message;
+        this.mensajes = [{ severity: 'error', summary: 'Error al cargar libros', detail: mensaje }]
       }
     });
   }
@@ -67,6 +68,10 @@ export class LibrosComponent implements OnInit {
   eliminar(libro: Libro) {
     this.servicioConfirm.confirm({
       message: "¿Realmente desea eliminar el libro: '" + libro.id + "-" + libro.titulo + '-' + libro.autor + "'?",
+      acceptLabel: 'Eliminar',
+      rejectLabel: 'Cancelar',
+      acceptButtonStyleClass: 'pi pi-danger',
+      acceptIcon: 'pi pi-trash',
       accept: () => {
         this.servicioLibros.delete(libro).subscribe({
           next: () => {
@@ -75,7 +80,8 @@ export class LibrosComponent implements OnInit {
           },
           error: (e) => {
             console.log(e);
-            this.mensajes = [{ severity: 'error', summary: 'Error al eliminar', detail: e.error }];
+            const mensaje: string = e.status === 403 || e.status === 401 ? 'No autorizado' : e.message;
+            this.mensajes = [{ severity: 'error', summary: 'Error al eliminar', detail: mensaje }];
           }
         });
       }

@@ -82,7 +82,9 @@ export class FormularioLibroComponent implements OnInit {
       },
       error: (e) => {
         this.guardando = false;
-        this.mensajes=[{severity: 'error', summary: 'Error al registrar', detail: e.error}];
+        console.log(e);
+        const mensaje: string = e.status === 403 || e.status === 401 ? 'No autorizado' : e.message;
+        this.mensajes=[{severity: 'error', summary: 'Error al registrar', detail: mensaje}];
        
        }
     });
@@ -98,7 +100,8 @@ export class FormularioLibroComponent implements OnInit {
       error: (e) => {
         this.guardando = false;
         console.log(e);
-        this.mensajes=[{severity: 'error', summary: 'Error al editar', detail: e.error}];
+        const mensaje: string = e.status === 403 || e.status === 401 ? 'No autorizado' : e.message;
+        this.mensajes=[{severity: 'error', summary: 'Error al editar', detail: mensaje}];
         }
     });
   }
