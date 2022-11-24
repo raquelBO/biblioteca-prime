@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { Message } from 'primeng/api';
 import { Credenciales } from '../interface/credenciales.interface';
 import { SesionService } from '../servicios/sesion.service';
@@ -18,10 +20,18 @@ export class LoginComponent implements OnInit {
   public mensajes: Message[] = [];
 
   constructor(
-    private servicioSesion: SesionService
+    private servicioSesion: SesionService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
+    const token: string | null = localStorage.getItem('token');
+    if(token){
+      const jwt: JwtHelperService = new JwtHelperService();
+      if(!jwt.isTokenExpired(token)){
+        this.router.navigate(['/app']);
+      }
+    }
   }
 
   public iniciarSesion(){
@@ -33,8 +43,8 @@ export class LoginComponent implements OnInit {
       }
       this.servicioSesion.iniciar(cred).subscribe({
         next: (respuesta) => {
-          console.log(respuesta);
-          this.mensajes = [{severity: 'success', summary: 'Inicio de sesión correcto'}]
+          this.mensajes = [{severity: 'success', summary: 'Inicio de sesión correcto'}];
+          this.router.navigate(['/app']);
         },
         error: (e) => {
           console.error('Error al iniciar sesion', e)
